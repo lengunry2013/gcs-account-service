@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gcs.account.dao.PlayerInfoMapper">
+
+    <resultMap id="PlayerInfoResult" type="com.gcs.account.vo.PlayerInfo">
+        <result column="player_id" jdbcType="VARCHAR" property="playerID" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+        <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="date_of_birth" jdbcType="DATE" property="dateOfBirth" />
+        <result column="country" jdbcType="VARCHAR" property="country" />
+    </resultMap>
+
+    <select id="checkPlayIDExistence" resultType="_boolean">
+        select count(player_id) from player_info where player_id = #{playerId}
+    </select>
+    <insert id="createPlayInfo" keyProperty="playerID" parameterType="com.gcs.account.vo.PlayerInfo">
+        insert into player_info(
+            player_id,
+            state)
+        values (#{playerID}, #{state});
+    </insert>
+
+</mapper>
